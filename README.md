@@ -12,7 +12,7 @@
 
 ## How to run:
 1. Open terminal and navigate to the project folder
-2. Type 'python model.py' and hit 'Enter'
+2. (OPTIONAL) Type 'python model.py' and hit 'Enter' - this will retrain the model
 3. Check the project folder for a file named 'trained_model.pth'
 4. In terminal, type 'python draw.py' and hit 'Enter'
 5. Enjoy
