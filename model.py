@@ -11,7 +11,25 @@ from torchinfo import summary
 import torch.nn.functional as F
 from torch.utils.tensorboard import SummaryWriter
 
-model_save_path = './models/more_filters_trained_model.pth'
+model_save_path = './models/fc_trained_model.pth'
+
+class FC_Net(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = torch.nn.Linear(784, 100)
+        self.fc2 = torch.nn.Linear(100, 50)
+        self.fc3 = torch.nn.Linear(50, 32)
+        self.fc4 = torch.nn.Linear(32, 10)
+        self.fc5 = torch.nn.Linear(10, 1)
+
+    def forward(self, x):
+        x = torch.flatten(x, 1) # flatten all dimensions except batch
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = F.relu(self.fc4(x))
+        x = self.fc5(x)
+        return x
 
 class Net(torch.nn.Module):
     def __init__(self):
@@ -56,7 +74,7 @@ if __name__ == '__main__':
     batch_size = 8
     train_dataloader = DataLoader(training_data, batch_size=batch_size, shuffle=True)
 
-    net = Net()
+    net = FC_Net()
 
     loss_fn = torch.nn.MSELoss()
     optimizer = torch.optim.SGD(net.parameters(), .001)

@@ -1,12 +1,12 @@
 import torch
-from model import Net, model_save_path
+from model import FC_Net, Net, model_save_path
 from torch.utils.data import Dataset
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-model = torch.load('models/trained_model.pth')
+model = torch.load('./models/fc_trained_model.pth')
 
 test_data = datasets.MNIST(
     root="data",

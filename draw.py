@@ -1,13 +1,13 @@
 import pygame
 import torch
-from model import Net, model_save_path
+from model import FC_Net, Net, model_save_path
 from PIL import Image
 import numpy as np
 
 # Model
 print(model_save_path)
 model = torch.load(model_save_path)
- 
+
 # Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
