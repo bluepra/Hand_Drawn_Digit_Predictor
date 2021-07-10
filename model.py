@@ -52,18 +52,7 @@ class Net(torch.nn.Module):
         x = self.fc3(x)
         return x
 
-def test_model(index):
-    image, label = training_data.__getitem__(index)
-    image = torch.unsqueeze(image, 0)
-    # print(image.shape)
-    print(f'True label: {label}')
-    plt.imshow(image[0][0], cmap = 'gray')
-    
-    pred = net(image) 
-    print(f'Pred label: {round(pred.item())}')
-    plt.show()
-
-if __name__ == '__main__':
+def train():
     training_data = datasets.MNIST(
         root="data",
         train=True,
@@ -107,4 +96,8 @@ if __name__ == '__main__':
         print(f'Epoch #{epoch +1}, average sample loss = {val}')
 
     torch.save(net, model_save_path)
+
+if __name__ == '__main__':
+    train()
+    
 
