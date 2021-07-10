@@ -11,7 +11,7 @@ from torchinfo import summary
 import torch.nn.functional as F
 from torch.utils.tensorboard import SummaryWriter
 
-model_save_path = './more_filters_trained_model.pth'
+model_save_path = './models/more_filters_trained_model.pth'
 
 class Net(torch.nn.Module):
     def __init__(self):

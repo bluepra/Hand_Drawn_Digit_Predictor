@@ -17,7 +17,7 @@ pygame.init()
 screen_size = (280, 280) # (width, height)
 screen = pygame.display.set_mode(screen_size)
  
-pygame.display.set_caption("Please draw any digit from 0 to 9")
+pygame.display.set_caption("Draw any digit 0 to 9")
  
 # Loop until the user clicks the close button.
 run = True
@@ -33,7 +33,7 @@ def resize_image(path):
     new_width = 28
     new_size = (new_width, new_width)
     image = image.resize(new_size)
-    image.save('resized_gray.png')
+    image.save('./images/resized_gray.png')
 
     arr = np.array(image.getdata())
     arr = np.reshape(arr, new_size) / 255
@@ -60,7 +60,7 @@ while run:
         elif event.type == pygame.KEYDOWN:
             # Enter 
             if event.key == pygame.K_RETURN:
-                image_path = 'user_drawn_image.png'
+                image_path = './images/user_drawn_image.png'
                 pygame.image.save(screen, image_path)
                 image = resize_image(image_path)
                 # print(image)
