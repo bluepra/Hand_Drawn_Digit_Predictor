@@ -77,7 +77,7 @@ while run:
     pygame.display.flip()
  
     # 60 frames per second
-    clock.tick(20)
+    clock.tick(60)
  
 # Close the window and quit.
 pygame.quit()
