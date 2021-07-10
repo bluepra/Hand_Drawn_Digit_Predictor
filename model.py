@@ -9,17 +9,18 @@ from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 from torchinfo import summary
 import torch.nn.functional as F
+from torch.utils.tensorboard import SummaryWriter
 
-model_save_path = './trained_model.pth'
+model_save_path = './more_filters_trained_model.pth'
 
 class Net(torch.nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv1 = torch.nn.Conv2d(1, 8, 3)
+        self.conv1 = torch.nn.Conv2d(1, 16, 3)
         self.pool = torch.nn.MaxPool2d(2, 2)
-        self.conv2 = torch.nn.Conv2d(8, 4, 3)
+        self.conv2 = torch.nn.Conv2d(16, 8, 3)
         
-        self.fc1 = torch.nn.Linear(4 * 5 * 5, 32)
+        self.fc1 = torch.nn.Linear(8 * 5 * 5, 32)
         self.fc2 = torch.nn.Linear(32, 10)
         self.fc3 = torch.nn.Linear(10, 1)
 
@@ -52,7 +53,7 @@ if __name__ == '__main__':
         transform=ToTensor()
     )
 
-    batch_size = 16
+    batch_size = 8
     train_dataloader = DataLoader(training_data, batch_size=batch_size, shuffle=True)
 
     net = Net()
@@ -60,9 +61,10 @@ if __name__ == '__main__':
     loss_fn = torch.nn.MSELoss()
     optimizer = torch.optim.SGD(net.parameters(), .001)
 
-    epochs = 5
+    tb = SummaryWriter()
+
+    epochs = 40
     num_samples = len(train_dataloader.dataset)
-    losses = []
 
     for epoch in range(epochs):
         print(f"Epoch {epoch+1}\n-------------------------------")
@@ -82,8 +84,9 @@ if __name__ == '__main__':
             if (batch + 1) % 1000 == 0:
                 print(f'Average loss for batch #{batch+1}: {loss}')
 
-        print(f'Epoch #{epoch +1}, average sample loss = {total_loss/num_samples}')
+        val = total_loss/num_samples
+        tb.add_scalar('Average Loss per Sample', val, epoch + 1)
+        print(f'Epoch #{epoch +1}, average sample loss = {val}')
 
     torch.save(net, model_save_path)
-
 
