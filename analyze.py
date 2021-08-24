@@ -71,12 +71,13 @@ def plot_missclassifcations():
     plt.show()
 
 if __name__ == '__main__':
-    # image = resize_image('images/user_drawn_image.png')
+    # image = resize_image('images/resized_gray.png')
 
     # plt.imshow(image[0][0], cmap = 'gray')
     # plt.show()
     for i in range(0, 10000, 1000):
         test_model(i)
+    # plot_missclassifcations()
 
 
 

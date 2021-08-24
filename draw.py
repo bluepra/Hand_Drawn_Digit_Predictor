@@ -55,7 +55,7 @@ def main():
             # Left mouse click - draw rect
             elif left_pressed:
                 (x,y) = pygame.mouse.get_pos()
-                r = pygame.Rect(x,y,28,28)
+                r = pygame.Rect(x,y,15,15)
                 pygame.draw.rect(screen, color = WHITE, rect = r)
             # Keyboard key pressed
             elif event.type == pygame.KEYDOWN:
